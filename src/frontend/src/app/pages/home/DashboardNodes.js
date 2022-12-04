@@ -59,11 +59,16 @@ function DashboardNodes() {
             type={type}
             onItemClick={() => {
               if (type === "dir") fetchData(name);
-              else
+              else {
+                const apiEndpoint =
+                  process.env.NODE_ENV === "production"
+                    ? window.location.origin
+                    : config.apiEndpoint;
                 window.open(
-                  `${config.apiEndpoint}${currentDir}/${name}`,
+                  `${apiEndpoint}${config.videoUrl}${currentDir}/${name}`,
                   "_blank"
                 );
+              }
             }}
           />
         ))}

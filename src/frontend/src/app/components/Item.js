@@ -5,7 +5,17 @@ import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 
 function Item({ name, type, onItemClick }) {
   return (
-    <Card sx={{ display: "flex", mb: 1 }} onClick={onItemClick}>
+    <Card
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        mb: 2,
+        fontSize: 16,
+        minHeight: 40,
+        p: 1,
+      }}
+      onClick={onItemClick}
+    >
       {type === "dir" ? (
         <FolderIcon color="warning" />
       ) : (

@@ -1,5 +1,5 @@
-RewriteBase /dev
+RewriteBase /courses/app
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /dev/index.html [L,QSA]
+RewriteRule ^(.*)$ /courses/app/index.html [L,QSA]
