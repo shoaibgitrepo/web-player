@@ -14,7 +14,7 @@ if ($_GET['dir']) $dir .= $_GET['dir'];
 // echo "$dir\r\n";
 
 $list = array_filter(scandir($dir), function($item) {
-  return $item !== "." && $item !== "api";
+  return $item !== "." && $item !== "api" && $item !== "app";
 });
 // array_shift($list);
 // $files2 = scandir($dir, SCANDIR_SORT_DESCENDING);
