@@ -8,6 +8,7 @@ import authReducer from "./slices/authSlice";
 import counterReducer from "./slices/counterSlice";
 import entityReducer from "./slices/entitySlice";
 import nodeReducer from "./slices/nodeSlice";
+import dirReducer from "./slices/dirSlice";
 
 // Local storage
 const storageAuth = { key: "auth", storage };
@@ -23,4 +24,5 @@ export default combineReducers({
   counter: sessionCounterReducer,
   entity: entityReducer,
   node: nodeReducer,
+  dir: dirReducer,
 });
