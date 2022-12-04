@@ -12,7 +12,9 @@ import dirReducer from "./slices/dirSlice";
 
 // Local storage
 const storageAuth = { key: "auth", storage };
+const storageDir = { key: "dir", storage };
 const storageAuthReducer = persistReducer(storageAuth, authReducer);
+const storageDirReducer = persistReducer(storageDir, dirReducer);
 
 // Session storage
 const sessionCounter = { key: "counter", storage: session };
@@ -24,5 +26,5 @@ export default combineReducers({
   counter: sessionCounterReducer,
   entity: entityReducer,
   node: nodeReducer,
-  dir: dirReducer,
+  dir: storageDirReducer,
 });

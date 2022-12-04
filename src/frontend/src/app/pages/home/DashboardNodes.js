@@ -37,7 +37,7 @@ function DashboardNodes() {
       currentDirArray.pop();
       newCurrentDir = currentDirArray.join("/");
     } else if (selectedDir) newCurrentDir = `${currentDir}/${selectedDir}`;
-    // else newCurrentDir = initialState.currentDir;
+    else newCurrentDir = currentDir;
 
     const query = `dir=${newCurrentDir}`;
     dispatch(fetchDir(query));
