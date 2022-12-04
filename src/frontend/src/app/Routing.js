@@ -10,6 +10,7 @@ import config from "../config";
 
 export function Routing() {
   const { user } = useSelector((state) => state.auth);
+  console.log("user", user);
   const isAuthorized = hasValue(user);
   return (
     <Routes>

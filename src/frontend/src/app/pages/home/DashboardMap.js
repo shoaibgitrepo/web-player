@@ -30,7 +30,7 @@ export default function DashboardMap() {
     setPageNumber(page);
   };
 
-  useEffect(() => fetchData(pageNumber), []);
+  // useEffect(() => fetchData(pageNumber), []);
 
   return (
     <Container maxWidth="xl">

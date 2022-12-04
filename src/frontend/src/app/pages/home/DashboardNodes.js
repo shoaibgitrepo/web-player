@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
+import FolderIcon from "@mui/icons-material/Folder";
 
 import { fetchNodes } from "../../../redux/slices/nodeSlice";
 import Loader from "../../components/Loader";
@@ -11,69 +12,61 @@ import Table from "../../components/Table";
 import Pagination from "../../components/Pagination";
 import { pageSize } from "../../utils/helper";
 import { nodesColumns } from "./DashboardUIHelper";
+import { fetchDir } from "../../../redux/slices/dirSlice";
+import Item from "../../components/Item";
+import config from "../../../config";
 
 function DashboardNodes() {
   const dispatch = useDispatch();
-  const { loading, nodes, count } = useSelector((state) => state.node);
+  const { loading, list, currentDir } = useSelector((state) => state.dir);
 
   const [searchText, setSearchText] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
-  const fetchData = (pageNumber) => {
-    const query = `searchText=${searchText}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
-    dispatch(fetchNodes(query));
+  const fetchData = (selectedDir = null) => {
+    let newCurrentDir = "";
+    const currentDirArray = currentDir.split("/");
+    // console.log(
+    //   "selectedDir",
+    //   selectedDir,
+    //   selectedDir && selectedDir.length,
+    //   currentDirArray
+    // );
+
+    if (selectedDir === ".." && currentDirArray.length) {
+      currentDirArray.pop();
+      newCurrentDir = currentDirArray.join("/");
+    } else if (selectedDir) newCurrentDir = `${currentDir}/${selectedDir}`;
+    // else newCurrentDir = initialState.currentDir;
+
+    const query = `dir=${newCurrentDir}`;
+    dispatch(fetchDir(query));
   };
 
-  const handlePageChange = (page) => {
-    fetchData(page);
-    setPageNumber(page);
-  };
+  // const handleItemClick = (dir) => {
+  //   fetchData(dir);
+  //   setPageNumber(page);
+  // };
 
-  useEffect(() => fetchData(pageNumber), []);
+  useEffect(() => fetchData(), []);
   return (
     <Container maxWidth="xl">
       <Loader loading={loading} />
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: "space-between",
-          mt: 3,
-        }}
-      >
-        <Box>
-          <TextField
-            size="small"
-            id="outlined-basic"
-            placeholder="Search on Textual Data"
-            variant="outlined"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+      <Box sx={{ mt: 3 }}>
+        {list.map(({ name, type }) => (
+          <Item
+            name={name}
+            type={type}
+            onItemClick={() => {
+              if (type === "dir") fetchData(name);
+              else
+                window.open(
+                  `${config.apiEndpoint}${currentDir}/${name}`,
+                  "_blank"
+                );
+            }}
           />
-          <Button
-            size="medium"
-            variant="contained"
-            sx={{ height: 40 }}
-            onClick={() => handlePageChange(1)}
-          >
-            Search
-          </Button>
-        </Box>
-        <Box>
-          <Pagination
-            pageNumber={pageNumber}
-            pageSize={pageSize}
-            count={count}
-            onPageChange={handlePageChange}
-          />
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          mt: 3,
-        }}
-      >
-        <Table columns={nodesColumns} data={nodes} />
+        ))}
       </Box>
     </Container>
   );

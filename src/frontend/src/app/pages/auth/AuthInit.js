@@ -9,8 +9,8 @@ function AuthInit({ children }) {
   const { loading, accessToken } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (accessToken) dispatch(getUserByToken());
-    else dispatch(setUser(null));
+    // if (accessToken) dispatch(getUserByToken());
+    // else dispatch(setUser(null));
     // eslint-disable-next-line
   }, []);
 

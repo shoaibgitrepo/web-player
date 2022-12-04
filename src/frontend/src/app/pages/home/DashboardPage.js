@@ -13,7 +13,7 @@ function DashboardPage(props) {
   const [page, setPage] = useState("nodes");
   return (
     <Suspense fallback={<Loader />}>
-      <DashbooardHeader page={page} setPage={setPage} />
+      {/* <DashbooardHeader page={page} setPage={setPage} /> */}
       <Routes>
         <Route
           path="*"
@@ -22,18 +22,6 @@ function DashboardPage(props) {
         <Route
           path={`${config.homepage}/dashboard/nodes`}
           element={<DashboardNodes />}
-        />
-        <Route
-          path={`${config.homepage}/dashboard/details/:id`}
-          element={<DashboardDetails />}
-        />
-        <Route
-          path={`${config.homepage}/dashboard/map`}
-          element={<DashboardMap />}
-        />
-        <Route
-          path={`${config.homepage}/dashboard/statistics`}
-          element={<DashboardStatistics />}
         />
       </Routes>
     </Suspense>

@@ -9,7 +9,7 @@ import DashboardPage from "./pages/home/DashboardPage";
 function BasePage() {
   return (
     <Suspense fallback={<Loader />}>
-      <Header />
+      {/* <Header /> */}
       <Box sx={{ paddingBottom: 6 }}>
         <Routes>
           {/* <Route
@@ -19,7 +19,7 @@ function BasePage() {
           <Route path="*" element={<DashboardPage />} />
         </Routes>
       </Box>
-      <Footer />
+      {/* <Footer /> */}
     </Suspense>
   );
 }

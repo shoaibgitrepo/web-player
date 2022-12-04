@@ -3,10 +3,18 @@ import http from "../../services/http";
 import urls from "../../services/urls";
 import { setToast } from "./toastSlice";
 
+// const initialState = {
+//   loading: false,
+//   accessToken: null,
+//   user: null,
+// };
+
 const initialState = {
   loading: false,
-  accessToken: null,
-  user: null,
+  accessToken: "token1",
+  user: {
+    name: "Test",
+  },
 };
 
 const url = "/todos/1";
