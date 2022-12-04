@@ -1,5 +1,5 @@
 export default {
-  homepage: "/dev",
-  apiUrl: "/api",
+  homepage: "/courses/app",
+  apiUrl: "/courses/api",
   apiEndpoint: "http://player.com",
 };
